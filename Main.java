@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Main
 {
 
@@ -11,7 +9,24 @@ public class Main
 //            System.exit(0);
 //        }
 //        hello.getShot();
-        HibernateSession hibernateSession = new HibernateSession();
-        hibernateSession.hibernateSession();
+
+        Placement placement = new Placement();
+
+        placement.testBattlePlacement(1,82);
+        placement.battlePlacement(1, 4);
+        placement.neaBattlePlacement(1,14);
+
+        placement.testCruiserPlacement(1,67);
+        placement.cruiserPlacement(5,7);
+        placement.neaCruiserPlacement(15,26);
+
+        placement.testSecondPlacement(1, SecondCruiserPosition.count);
+        placement.secondPlacement(8,10);
+        placement.neaSecondPlacement(27,38);
+
+
+//        SecondCruiserPosition secondCruiserPosition = new SecondCruiserPosition();
+//        secondCruiserPosition.testFieldPosition();
+
     }
 }

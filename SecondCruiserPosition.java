@@ -13,6 +13,8 @@ public class SecondCruiserPosition implements ShipsPosition {
     List secondCruiser = new ArrayList();
     List nearSecondCruiser = new ArrayList();
     List finalFieldShips = new ArrayList();
+    List nearShip = new ArrayList();
+
     public static int count;
     private Integer x;
     private Integer y;
@@ -161,9 +163,30 @@ public class SecondCruiserPosition implements ShipsPosition {
         return finalFieldShips;
     }
 
+    public List<String> nearShips (int f, int m) {
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("test.cfg.xml").build();
+        Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
+        TestField testField = new TestField();
+        for (;f <= m;f++ ) {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            testField = session.get(TestField.class,f);
+            nearShip.add(testField.getName());
+            session.save(testField);
+            transaction.commit();
+        }
+        sessionFactory.close();
+        finalFieldShips.forEach(System.out::print);
+        System.out.println();
+        return nearShip;
+    }
+
     public int Count() {
+        nearShips(15,26);
         for (Object ele : nearSecondCruiser) {
-            if (finalFieldShips.contains(ele)) {
+            if (nearShip.contains(ele)) {
                 count++;
             }
         }

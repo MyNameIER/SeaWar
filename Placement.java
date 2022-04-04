@@ -181,4 +181,20 @@ public class Placement {
         sessionFactory.close();
     }
 
+    public void tableMyShot(int i) {
+        UserShot userShot = new UserShot();
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("secondhibernate.cfg.xml").build();
+        Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
+        MyShot myShot = new MyShot();
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            myShot = session.get(MyShot.class, i);
+            myShot.setName((String) userShot.MyShot);
+            session.save(myShot);
+            transaction.commit();
+             sessionFactory.close();
+    }
+
 }
